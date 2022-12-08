@@ -10,6 +10,54 @@
     },
     "query": "INSERT INTO 'tasks' (task_id, user_id, task_type, state, src_file, res_file) VALUES ($1, $2, $3, $4, $5, $6)"
   },
+  "94c50a0103048a7503f0c1b773d03a76e03d9b4b94a378b03bc037e082f2090e": {
+    "describe": {
+      "columns": [
+        {
+          "name": "task_id",
+          "ordinal": 0,
+          "type_info": "Text"
+        },
+        {
+          "name": "user_id",
+          "ordinal": 1,
+          "type_info": "Text"
+        },
+        {
+          "name": "task_type",
+          "ordinal": 2,
+          "type_info": "Text"
+        },
+        {
+          "name": "state",
+          "ordinal": 3,
+          "type_info": "Text"
+        },
+        {
+          "name": "src_file",
+          "ordinal": 4,
+          "type_info": "Text"
+        },
+        {
+          "name": "res_file",
+          "ordinal": 5,
+          "type_info": "Text"
+        }
+      ],
+      "nullable": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "parameters": {
+        "Right": 0
+      }
+    },
+    "query": "SELECT * from tasks"
+  },
   "a8f395bccdf489b89d9834905b6e2223dc864a97da274fd68373402b12fbed3d": {
     "describe": {
       "columns": [

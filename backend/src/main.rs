@@ -20,6 +20,7 @@ async fn main() {
         .init();
 
     db::init_db_and_migrate().await;
+    db::seed_db().await;
 
     let api_router = routes::create_api_router();
     let app = Router::new()

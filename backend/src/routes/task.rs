@@ -11,6 +11,11 @@ async fn fetch_task_by_id(Path(task_id): Path<String>) -> Json<Option<Task>> {
 
     Json(task)
 }
+async fn fetch_all_tasks() -> Json<Vec<Task>> {
+    let tasks = TaskRepo::get_all_tasks().await;
+
+    Json(tasks)
+}
 
 #[derive(serde::Deserialize)]
 struct NewTask {
@@ -30,5 +35,5 @@ async fn insert_task(Json(task_data): Json<NewTask>) -> Json<String> {
 pub fn create_task_router() -> Router {
     Router::new()
         .route("/:task_id", get(fetch_task_by_id))
-        .route("/", post(insert_task))
+        .route("/", post(insert_task).get(fetch_all_tasks))
 }

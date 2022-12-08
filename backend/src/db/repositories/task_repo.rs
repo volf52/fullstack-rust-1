@@ -7,7 +7,7 @@ use crate::db::POOL;
 
 struct TaskStateDb(TaskState);
 
-#[derive(sqlx::Encode, sqlx::Decode, sqlx::Type)]
+#[derive(sqlx::Encode, sqlx::Decode, sqlx::Type, sqlx::FromRow)]
 struct TaskDb {
     pub user_id: String,
     pub task_id: String,
@@ -70,7 +70,7 @@ impl TaskRepo {
         let pool = POOL.get().expect("Failed to get POOL");
         let task_state_db = TaskStateDb(task.state.clone());
 
-        let res = sqlx::query!("INSERT INTO 'tasks' (task_id, user_id, task_type, state, src_file, res_file) VALUES ($1, $2, $3, $4, $5, $6)", task.task_id, task.user_id, task.task_type, task_state_db, task.src_file, task.res_file).execute(pool).await;
+        sqlx::query!("INSERT INTO 'tasks' (task_id, user_id, task_type, state, src_file, res_file) VALUES ($1, $2, $3, $4, $5, $6)", task.task_id, task.user_id, task.task_type, task_state_db, task.src_file, task.res_file).execute(pool).await.unwrap();
     }
 
     pub async fn get_task(task_id: String) -> Option<Task> {
@@ -82,5 +82,16 @@ impl TaskRepo {
             .unwrap();
 
         task.map(|task| task.into())
+    }
+
+    pub async fn get_all_tasks() -> Vec<Task> {
+        let pool = POOL.get().expect("Failed to get POOL");
+
+        let tasks = sqlx::query_as!(TaskDb, "SELECT * from tasks")
+            .fetch_all(pool)
+            .await
+            .unwrap();
+
+        tasks.into_iter().map(|t| t.into()).collect()
     }
 }
