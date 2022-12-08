@@ -1,0 +1,61 @@
+{
+  "db": "SQLite",
+  "42d9c9d84a3c73580cc5536d95416060ff9dbd46f2c2c4d364189743a957f80c": {
+    "describe": {
+      "columns": [],
+      "nullable": [],
+      "parameters": {
+        "Right": 6
+      }
+    },
+    "query": "INSERT INTO 'tasks' (task_id, user_id, task_type, state, src_file, res_file) VALUES ($1, $2, $3, $4, $5, $6)"
+  },
+  "a8f395bccdf489b89d9834905b6e2223dc864a97da274fd68373402b12fbed3d": {
+    "describe": {
+      "columns": [
+        {
+          "name": "task_id",
+          "ordinal": 0,
+          "type_info": "Text"
+        },
+        {
+          "name": "user_id",
+          "ordinal": 1,
+          "type_info": "Text"
+        },
+        {
+          "name": "task_type",
+          "ordinal": 2,
+          "type_info": "Text"
+        },
+        {
+          "name": "state",
+          "ordinal": 3,
+          "type_info": "Text"
+        },
+        {
+          "name": "src_file",
+          "ordinal": 4,
+          "type_info": "Text"
+        },
+        {
+          "name": "res_file",
+          "ordinal": 5,
+          "type_info": "Text"
+        }
+      ],
+      "nullable": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "parameters": {
+        "Right": 1
+      }
+    },
+    "query": "SELECT * from tasks where task_id = $1"
+  }
+}
