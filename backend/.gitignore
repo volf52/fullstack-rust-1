@@ -1,3 +1,4 @@
 /target
 .env
 data_sqlite.db
+dist
