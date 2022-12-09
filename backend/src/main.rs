@@ -28,7 +28,12 @@ async fn main() {
         .merge(SpaRouter::new("/", "./dist"))
         .layer(ServiceBuilder::new().layer(TraceLayer::new_for_http()));
 
-    let sock_addr = SocketAddr::from((IpAddr::V4(Ipv4Addr::LOCALHOST), 3001));
+    let port = std::env::var("PORT")
+        .map(|v| v.parse().unwrap())
+        .unwrap_or(3001);
+
+    let sock_addr = SocketAddr::from((IpAddr::V4(Ipv4Addr::UNSPECIFIED), port));
+
     log::info!("Listening on http://{}", sock_addr);
     axum::Server::bind(&sock_addr)
         .serve(app.into_make_service())

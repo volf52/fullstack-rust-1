@@ -1,2 +1,7 @@
 [[proxy]]
 backend = "http://localhost:3002/api"
+
+[[hooks]]
+stage = "build"
+command = "sh"
+command_arguments = ["-c", "echo Staging directory: $TRUNK_STAGING_DIR"]
