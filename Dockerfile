@@ -85,7 +85,7 @@ COPY --from=trunk-src /bin/trunk /bin/trunk
 
 COPY frontend .
 
-RUN /bin/trunk build --release
+RUN /bin/trunk build --release --public-url /assets/
 
 FROM base as backend-build
 

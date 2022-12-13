@@ -25,7 +25,7 @@ async fn main() {
     let api_router = routes::create_api_router();
     let app = Router::new()
         .nest("/api", api_router)
-        .merge(SpaRouter::new("/", "./dist"))
+        .merge(SpaRouter::new("/assets", "./dist"))
         .layer(ServiceBuilder::new().layer(TraceLayer::new_for_http()));
 
     let port = std::env::var("PORT")

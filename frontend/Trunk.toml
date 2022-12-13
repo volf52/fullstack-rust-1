@@ -1,5 +1,5 @@
 [[proxy]]
-backend = "http://localhost:3002/api"
+backend = "http://localhost:3001/api"
 
 [[hooks]]
 stage = "build"
